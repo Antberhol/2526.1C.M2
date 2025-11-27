@@ -199,22 +199,6 @@ def run(self) -> None:
     self.sfx_explosion = None
     self.sfx_victoria = None
 
-    # probamos cargar los sonidos, si falla seguimos sin ellos
-    try:
-        path_sonido_1 = Path("2526.1C.M2\\sonidos\\Blip.wav")
-        path_sonido_2 = Path("2526.1C.M2\\sonidos\\Boom3.wav")
-        path_sonido_3 = Path("2526.1C.M2\\sonidos\\Random31.wav")
-
-        self.sfx_rebote = pygame.mixer.Sound(path_sonido_1)
-        self.sfx_explosion = pygame.mixer.Sound(path_sonido_2)
-        self.sfx_victoria = pygame.mixer.Sound(path_sonido_3)
-        self.sfx_rebote.set_volume(0.5) 
-        self.sfx_explosion.set_volume(0.4)
-        self.sfx_victoria.set_volume(0.6)
-    except Exception as e:
-        print(f"Aviso: No se cargaron los sonidos ({e})")
-        # seguimos corriendo el juego aunque falle
-
     self.cargar_nivel()
     self.preparar_entidades()
     self.crear_bloques()
