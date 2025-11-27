@@ -82,7 +82,7 @@ class ArkanoidGame:
         self.block_colors: list[tuple[int, int, int]] = []
         self.block_symbols: list[str] = []
         self.ball_pos = Vector2(0, 0)
-        self.ball_velocity = Vector2(0, 0)
+        self.ball_velocity = Vector2(0,-1)
 
         # Estado del juego
         self.score: int = 0
@@ -108,8 +108,9 @@ class ArkanoidGame:
 
         if direccion.length_squared() == 0:
             direccion = Vector2(0, -1)
-
+        
         self.ball_pos.update(self.paddle.centerx, self.paddle.top - self.BALL_RADIUS - 1)
+        
         self.ball_velocity = direccion.normalize() * self.BALL_SPEED
 
     def calcular_posicion_bloque(self, fila: int, columna: int) -> pygame.Rect:
@@ -134,8 +135,9 @@ class ArkanoidGame:
             return
 
         # Permite ejecutar en entornos sin servidor gráfico (tests/CI).
-        if "SDL_VIDEODRIVER" not in os.environ and not os.environ.get("DISPLAY"):
-            os.environ["SDL_VIDEODRIVER"] = "dummy"
+        #if "SDL_VIDEODRIVER" not in os.environ and not os.environ.get("DISPLAY"):
+        #    os.environ["SDL_VIDEODRIVER"] = "dummy"
+            
 
         pygame.init()
         pygame.display.set_caption("Arkanoid M2")
